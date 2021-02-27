@@ -11,7 +11,7 @@ Version:	3.38.0
 Release:	1
 License:	LGPL v2+
 Group:		Libraries/Python
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/pygobject/3.38/%{module}-%{version}.tar.xz
+Source0:	https://download.gnome.org/sources/pygobject/3.38/%{module}-%{version}.tar.xz
 # Source0-md5:	2ad8d8f10d1f12a8c66d8179659d5eb9
 URL:		https://wiki.gnome.org/Projects/PyGObject
 BuildRequires:	cairo-gobject-devel
