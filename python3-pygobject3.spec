@@ -34,7 +34,7 @@ BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	glib2 >= 1:2.48.0
 Requires:	gobject-introspection >= 1.46.0
-Requires:	python-modules >= 1:2.7
+Requires:	python3-modules >= 1:3.5
 Conflicts:	python3-pygobject < 2.28.6-3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
