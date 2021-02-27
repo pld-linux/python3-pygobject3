@@ -84,9 +84,7 @@ wiązaniami Pythona.
 Summary:	API documentation for Python GObject library
 Summary(pl.UTF-8):	Dokumentacja biblioteki Pythona GObject
 Group:		Documentation
-%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
-%endif
 
 %description apidocs
 API documentation for Python GObject library.
@@ -99,9 +97,7 @@ Summary:	Example programs for GObject library
 Summary(pl.UTF-8):	Programy przykładowe dla biblioteki GObject
 Group:		Development/Languages/Python
 Requires:	%{name}-devel = %{version}-%{release}
-%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
-%endif
 
 %description examples
 This package contains example programs for GObject library.
