@@ -7,22 +7,22 @@
 Summary:	Python 3 bindings for GObject library
 Summary(pl.UTF-8):	Wiązania Pythona 3 do biblioteki GObject
 Name:		python3-pygobject3
-Version:	3.38.0
-Release:	2
+Version:	3.40.0
+Release:	1
 License:	LGPL v2+
 Group:		Libraries/Python
-Source0:	https://download.gnome.org/sources/pygobject/3.38/%{module}-%{version}.tar.xz
-# Source0-md5:	2ad8d8f10d1f12a8c66d8179659d5eb9
+Source0:	https://download.gnome.org/sources/pygobject/3.40/%{module}-%{version}.tar.xz
+# Source0-md5:	ce47b7ca78e7035e699ce62ca33cebed
 URL:		https://wiki.gnome.org/Projects/PyGObject
 BuildRequires:	cairo-gobject-devel
-BuildRequires:	glib2-devel >= 1:2.48.0
-BuildRequires:	gobject-introspection-devel >= 1.46.0
+BuildRequires:	glib2-devel >= 1:2.56.0
+BuildRequires:	gobject-introspection-devel >= 1.56.0
 BuildRequires:	libffi-devel >= 3.0
 BuildRequires:	pkgconfig
-BuildRequires:	python3 >= 1:3.5
-BuildRequires:	python3-devel >= 1:3.5
-BuildRequires:	python3-modules >= 1:3.5
-BuildRequires:	python3-pycairo-devel >= 1.11.1
+BuildRequires:	python3 >= 1:3.6
+BuildRequires:	python3-devel >= 1:3.6
+BuildRequires:	python3-modules >= 1:3.6
+BuildRequires:	python3-pycairo-devel >= 1.16.0
 BuildRequires:	python3-setuptools
 %if %{with tests}
 BuildRequires:	python3-pytest
@@ -32,9 +32,9 @@ BuildRequires:	rpmbuild(macros) >= 1.714
 %{?with_doc:BuildRequires:	sphinx-pdg}
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
-Requires:	glib2 >= 1:2.48.0
-Requires:	gobject-introspection >= 1.46.0
-Requires:	python3-modules >= 1:3.5
+Requires:	glib2 >= 1:2.56.0
+Requires:	gobject-introspection >= 1.56.0
+Requires:	python3-modules >= 1:3.6
 Conflicts:	python3-pygobject < 2.28.6-3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
