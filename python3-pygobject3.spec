@@ -28,6 +28,7 @@ BuildRequires:	python3-setuptools
 BuildRequires:	python3-pytest
 %endif
 BuildRequires:	rpm-pythonprov
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.714
 %{?with_doc:BuildRequires:	sphinx-pdg}
 BuildRequires:	tar >= 1:1.22
