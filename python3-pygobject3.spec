@@ -30,7 +30,10 @@ BuildRequires:	python3-pytest
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.714
-%{?with_doc:BuildRequires:	sphinx-pdg}
+%if %{with doc}
+BuildRequires:	sphinx-pdg
+BuildRequires:	python3-sphinx_rtd_theme
+%endif
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	glib2 >= 1:2.56.0
@@ -120,7 +123,7 @@ Ten pakiet zawiera przykładowe programy dla biblioteki GObject.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+install -d $RPM_BUILD_ROOT{%{_examplesdir}/%{name}-%{version},%{py3_sitescriptdir}/gi/overrides/__pycache__}
 
 %py3_install
 
@@ -147,6 +150,9 @@ rm -rf $RPM_BUILD_ROOT
 %{py3_sitedir}/pygtkcompat/*.py
 %{py3_sitedir}/pygtkcompat/__pycache__
 %{py3_sitedir}/PyGObject-%{version}-py*.egg-info
+%dir %{py3_sitescriptdir}/gi/overrides/__pycache__
+%dir %{py3_sitescriptdir}/gi/overrides/__pycache__
+%dir %{py3_sitescriptdir}/gi/overrides/__pycache__
 
 %files devel
 %defattr(644,root,root,755)
