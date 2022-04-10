@@ -8,7 +8,7 @@ Summary:	Python 3 bindings for GObject library
 Summary(pl.UTF-8):	Wiązania Pythona 3 do biblioteki GObject
 Name:		python3-pygobject3
 Version:	3.42.0
-Release:	5
+Release:	6
 License:	LGPL v2+
 Group:		Libraries/Python
 Source0:	https://download.gnome.org/sources/pygobject/3.42/%{module}-%{version}.tar.xz
@@ -150,8 +150,8 @@ rm -rf $RPM_BUILD_ROOT
 %{py3_sitedir}/pygtkcompat/*.py
 %{py3_sitedir}/pygtkcompat/__pycache__
 %{py3_sitedir}/PyGObject-%{version}-py*.egg-info
-%dir %{py3_sitescriptdir}/gi/overrides/__pycache__
-%dir %{py3_sitescriptdir}/gi/overrides/__pycache__
+%dir %{py3_sitescriptdir}/gi
+%dir %{py3_sitescriptdir}/gi/overrides
 %dir %{py3_sitescriptdir}/gi/overrides/__pycache__
 
 %files devel
