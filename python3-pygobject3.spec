@@ -19,9 +19,9 @@ BuildRequires:	glib2-devel >= 1:2.64.0
 BuildRequires:	gobject-introspection-devel >= 1.64.0
 BuildRequires:	libffi-devel >= 3.0
 BuildRequires:	pkgconfig
-BuildRequires:	python3 >= 1:3.7
-BuildRequires:	python3-devel >= 1:3.7
-BuildRequires:	python3-modules >= 1:3.7
+BuildRequires:	python3 >= 1:3.8
+BuildRequires:	python3-devel >= 1:3.8
+BuildRequires:	python3-modules >= 1:3.8
 BuildRequires:	python3-pycairo-devel >= 1.16.0
 BuildRequires:	python3-setuptools
 %if %{with tests}
@@ -38,7 +38,7 @@ BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	glib2 >= 1:2.64.0
 Requires:	gobject-introspection >= 1.64.0
-Requires:	python3-modules >= 1:3.7
+Requires:	python3-modules >= 1:3.8
 Conflicts:	python3-pygobject < 2.28.6-3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
