@@ -7,23 +7,24 @@
 Summary:	Python 3 bindings for GObject library
 Summary(pl.UTF-8):	Wiązania Pythona 3 do biblioteki GObject
 Name:		python3-pygobject3
-Version:	3.46.0
+Version:	3.48.0
 Release:	1
 License:	LGPL v2+
 Group:		Libraries/Python
-Source0:	https://download.gnome.org/sources/pygobject/3.46/%{module}-%{version}.tar.xz
-# Source0-md5:	56c36bfe6f24fa28182a7adcd3815b2c
+Source0:	https://download.gnome.org/sources/pygobject/3.48/%{module}-%{version}.tar.xz
+# Source0-md5:	342a4a0741959e27cb5ecde2efeb40fe
 URL:		https://wiki.gnome.org/Projects/PyGObject
 BuildRequires:	cairo-gobject-devel
-BuildRequires:	glib2-devel >= 1:2.64.0
+BuildRequires:	glib2-devel >= 1:2.67.4
 BuildRequires:	gobject-introspection-devel >= 1.64.0
 BuildRequires:	libffi-devel >= 3.0
+BuildRequires:	meson >= 0.64.0
+BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	python3 >= 1:3.8
 BuildRequires:	python3-devel >= 1:3.8
 BuildRequires:	python3-modules >= 1:3.8
 BuildRequires:	python3-pycairo-devel >= 1.16.0
-BuildRequires:	python3-setuptools
 %if %{with tests}
 BuildRequires:	python3-pytest
 %endif
@@ -36,7 +37,7 @@ BuildRequires:	python3-sphinx_rtd_theme
 %endif
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
-Requires:	glib2 >= 1:2.64.0
+Requires:	glib2 >= 1:2.67.4
 Requires:	gobject-introspection >= 1.64.0
 Requires:	python3-modules >= 1:3.8
 Conflicts:	python3-pygobject < 2.28.6-3
@@ -54,7 +55,7 @@ Summary(pl.UTF-8):	Wiązania Pythona 3 do biblioteki GObject - metapakiet progra
 Group:		Development/Languages/Python
 Requires:	%{name} = %{version}-%{release}
 Requires:	python-pygobject3-common-devel = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.64.0
+Requires:	glib2-devel >= 1:2.67.4
 Requires:	libffi-devel >= 3.0
 Requires:	python3-devel >= 1:3.5
 
@@ -71,7 +72,7 @@ Summary:	Python bindings for GObject library
 Summary(pl.UTF-8):	Wiązania Pythona do biblioteki GObject
 Group:		Development/Languages/Python
 Requires:	%{name} = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.64.0
+Requires:	glib2-devel >= 1:2.67.4
 Requires:	libffi-devel >= 3.0
 
 %description -n python-pygobject3-common-devel
@@ -115,7 +116,10 @@ Ten pakiet zawiera przykładowe programy dla biblioteki GObject.
 %{__sed} -i -e '1s|#!/usr/bin/env python$|#!%{__python}|'  examples/cairo-demo.py
 
 %build
-%py3_build %{?with_tests:test}
+%meson build \
+	%{!?with_tests:-Dtests=false}
+
+%ninja_build -C build
 
 %if %{with doc}
 %{__make} -C docs
@@ -125,7 +129,10 @@ Ten pakiet zawiera przykładowe programy dla biblioteki GObject.
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_examplesdir}/%{name}-%{version},%{py3_sitescriptdir}/gi/overrides/__pycache__}
 
-%py3_install
+%ninja_install -C build
+
+%py3_comp $RPM_BUILD_ROOT%{py3_sitedir}
+%py3_ocomp $RPM_BUILD_ROOT%{py3_sitedir}
 
 cp -a examples/*.py $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
@@ -149,7 +156,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py3_sitedir}/pygtkcompat
 %{py3_sitedir}/pygtkcompat/*.py
 %{py3_sitedir}/pygtkcompat/__pycache__
-%{py3_sitedir}/PyGObject-%{version}-py*.egg-info
+%{py3_sitedir}/PyGObject-%{version}.egg-info
 %dir %{py3_sitescriptdir}/gi
 %dir %{py3_sitescriptdir}/gi/overrides
 %dir %{py3_sitescriptdir}/gi/overrides/__pycache__
