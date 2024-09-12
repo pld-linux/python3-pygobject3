@@ -7,13 +7,13 @@
 Summary:	Python 3 bindings for GObject library
 Summary(pl.UTF-8):	Wiązania Pythona 3 do biblioteki GObject
 Name:		python3-pygobject3
-Version:	3.48.2
+Version:	3.50.0
 Release:	1
 License:	LGPL v2+
 Group:		Libraries/Python
-Source0:	https://download.gnome.org/sources/pygobject/3.48/%{module}-%{version}.tar.xz
-# Source0-md5:	fe1cb825adc8a49d1629b97b7d26dffc
-URL:		https://wiki.gnome.org/Projects/PyGObject
+Source0:	https://download.gnome.org/sources/pygobject/3.50/%{module}-%{version}.tar.xz
+# Source0-md5:	8f34e4bc1d7d57faf558180b0051c9ef
+URL:		https://pygobject.gnome.org/
 BuildRequires:	cairo-gobject-devel
 BuildRequires:	glib2-devel >= 1:2.67.4
 BuildRequires:	gobject-introspection-devel >= 1.64.0
@@ -21,25 +21,27 @@ BuildRequires:	libffi-devel >= 3.0
 BuildRequires:	meson >= 0.64.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
-BuildRequires:	python3 >= 1:3.8
-BuildRequires:	python3-devel >= 1:3.8
-BuildRequires:	python3-modules >= 1:3.8
+BuildRequires:	python3 >= 1:3.9
+BuildRequires:	python3-devel >= 1:3.9
+BuildRequires:	python3-modules >= 1:3.9
 BuildRequires:	python3-pycairo-devel >= 1.16.0
 %if %{with tests}
 BuildRequires:	python3-pytest
 %endif
-BuildRequires:	rpm-pythonprov
+BuildRequires:	rpm-pythonprov >= 1:4.13
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.714
 %if %{with doc}
-BuildRequires:	sphinx-pdg
+BuildRequires:	python3-Sphinx
+BuildRequires:	python3-furo
+BuildRequires:	python3-sphinx_copybutton >= 0.5.2
 BuildRequires:	python3-sphinx_rtd_theme
 %endif
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	glib2 >= 1:2.67.4
 Requires:	gobject-introspection >= 1.64.0
-Requires:	python3-modules >= 1:3.8
+Requires:	python3-modules >= 1:3.9
 Conflicts:	python3-pygobject < 2.28.6-3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -57,7 +59,8 @@ Requires:	%{name} = %{version}-%{release}
 Requires:	python-pygobject3-common-devel = %{version}-%{release}
 Requires:	glib2-devel >= 1:2.67.4
 Requires:	libffi-devel >= 3.0
-Requires:	python3-devel >= 1:3.5
+Requires:	python3-devel >= 1:3.9
+Obsoletes:	python3-pygobject3-examples < 3.50
 
 %description devel
 This metapackage gathers files required to develop GObject bindings
@@ -97,23 +100,8 @@ API documentation for Python GObject library.
 %description apidocs -l pl.UTF-8
 Dokumentacja biblioteki Pythona GObject.
 
-%package examples
-Summary:	Example programs for GObject library
-Summary(pl.UTF-8):	Programy przykładowe dla biblioteki GObject
-Group:		Development/Languages/Python
-Requires:	%{name}-devel = %{version}-%{release}
-BuildArch:	noarch
-
-%description examples
-This package contains example programs for GObject library.
-
-%description examples -l pl.UTF-8
-Ten pakiet zawiera przykładowe programy dla biblioteki GObject.
-
 %prep
 %setup -q -n %{module}-%{version}
-
-%{__sed} -i -e '1s|#!/usr/bin/env python$|#!%{__python}|'  examples/cairo-demo.py
 
 %build
 %meson build \
@@ -127,14 +115,12 @@ Ten pakiet zawiera przykładowe programy dla biblioteki GObject.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_examplesdir}/%{name}-%{version},%{py3_sitescriptdir}/gi/overrides/__pycache__}
+install -d $RPM_BUILD_ROOT%{py3_sitescriptdir}/gi/overrides/__pycache__
 
 %ninja_install -C build
 
 %py3_comp $RPM_BUILD_ROOT%{py3_sitedir}
 %py3_ocomp $RPM_BUILD_ROOT%{py3_sitedir}
-
-cp -a examples/*.py $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -156,7 +142,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py3_sitedir}/pygtkcompat
 %{py3_sitedir}/pygtkcompat/*.py
 %{py3_sitedir}/pygtkcompat/__pycache__
-%{py3_sitedir}/PyGObject-%{version}.egg-info
+%{py3_sitedir}/PyGObject-%{version}.dist-info
 %dir %{py3_sitescriptdir}/gi
 %dir %{py3_sitescriptdir}/gi/overrides
 %dir %{py3_sitescriptdir}/gi/overrides/__pycache__
@@ -174,7 +160,3 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc docs/_build/{_images,_static,devguide,guide,*.html,*.js}
 %endif
-
-%files examples
-%defattr(644,root,root,755)
-%{_examplesdir}/%{name}-%{version}
