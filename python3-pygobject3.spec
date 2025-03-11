@@ -8,7 +8,7 @@ Summary:	Python 3 bindings for GObject library
 Summary(pl.UTF-8):	Wiązania Pythona 3 do biblioteki GObject
 Name:		python3-pygobject3
 Version:	3.50.0
-Release:	3
+Release:	4
 License:	LGPL v2+
 Group:		Libraries/Python
 Source0:	https://download.gnome.org/sources/pygobject/3.50/%{module}-%{version}.tar.xz
@@ -30,7 +30,7 @@ BuildRequires:	python3-pytest
 %endif
 BuildRequires:	rpm-pythonprov >= 1:4.13
 BuildRequires:	rpm-build >= 4.6
-BuildRequires:	rpmbuild(macros) >= 1.714
+BuildRequires:	rpmbuild(macros) >= 2.042
 %if %{with doc}
 BuildRequires:	python3-Sphinx
 BuildRequires:	python3-furo
@@ -104,10 +104,10 @@ Dokumentacja biblioteki Pythona GObject.
 %setup -q -n %{module}-%{version}
 
 %build
-%meson build \
+%meson \
 	%{!?with_tests:-Dtests=false}
 
-%ninja_build -C build
+%meson_build
 
 %if %{with doc}
 %{__make} -C docs
@@ -117,7 +117,7 @@ Dokumentacja biblioteki Pythona GObject.
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{py3_sitescriptdir}/gi/overrides/__pycache__
 
-%ninja_install -C build
+%meson_install
 
 %py3_comp $RPM_BUILD_ROOT%{py3_sitedir}
 %py3_ocomp $RPM_BUILD_ROOT%{py3_sitedir}
