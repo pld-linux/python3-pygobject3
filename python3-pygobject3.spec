@@ -7,15 +7,15 @@
 Summary:	Python 3 bindings for GObject library
 Summary(pl.UTF-8):	Wiązania Pythona 3 do biblioteki GObject
 Name:		python3-pygobject3
-Version:	3.50.0
-Release:	4
+Version:	3.52.1
+Release:	1
 License:	LGPL v2+
 Group:		Libraries/Python
-Source0:	https://download.gnome.org/sources/pygobject/3.50/%{module}-%{version}.tar.xz
-# Source0-md5:	8f34e4bc1d7d57faf558180b0051c9ef
+Source0:	https://download.gnome.org/sources/pygobject/3.52/%{module}-%{version}.tar.gz
+# Source0-md5:	123f69218036939f216593fdc1ee0799
 URL:		https://pygobject.gnome.org/
 BuildRequires:	cairo-gobject-devel
-BuildRequires:	glib2-devel >= 1:2.67.4
+BuildRequires:	glib2-devel >= 1:2.80.0
 BuildRequires:	gobject-introspection-devel >= 1.64.0
 BuildRequires:	libffi-devel >= 3.0
 BuildRequires:	meson >= 0.64.0
@@ -37,9 +37,7 @@ BuildRequires:	python3-furo
 BuildRequires:	python3-sphinx_copybutton >= 0.5.2
 BuildRequires:	python3-sphinx_rtd_theme
 %endif
-BuildRequires:	tar >= 1:1.22
-BuildRequires:	xz
-Requires:	glib2 >= 1:2.67.4
+Requires:	glib2 >= 1:2.80.0
 Requires:	gobject-introspection >= 1.64.0
 Requires:	python3-modules >= 1:3.9
 Conflicts:	python3-pygobject < 2.28.6-3
@@ -57,7 +55,7 @@ Summary(pl.UTF-8):	Wiązania Pythona 3 do biblioteki GObject - metapakiet progra
 Group:		Development/Languages/Python
 Requires:	%{name} = %{version}-%{release}
 Requires:	python-pygobject3-common-devel = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.67.4
+Requires:	glib2-devel >= 1:2.80.0
 Requires:	libffi-devel >= 3.0
 Requires:	python3-devel >= 1:3.9
 Obsoletes:	python3-pygobject3-examples < 3.50
@@ -75,7 +73,7 @@ Summary:	Python bindings for GObject library
 Summary(pl.UTF-8):	Wiązania Pythona do biblioteki GObject
 Group:		Development/Languages/Python
 Requires:	%{name} = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.67.4
+Requires:	glib2-devel >= 1:2.80.0
 Requires:	libffi-devel >= 3.0
 
 %description -n python-pygobject3-common-devel
@@ -105,6 +103,7 @@ Dokumentacja biblioteki Pythona GObject.
 
 %build
 %meson \
+	-Dpycairo=enabled \
 	%{!?with_tests:-Dtests=false}
 
 %meson_build
