@@ -35,7 +35,7 @@ BuildRequires:	rpmbuild(macros) >= 2.042
 BuildRequires:	python3-Sphinx
 BuildRequires:	python3-furo
 BuildRequires:	python3-sphinx_copybutton >= 0.5.2
-BuildRequires:	python3-sphinx_rtd_theme
+BuildRequires:	python3-pydata_sphinx_theme
 %endif
 Requires:	glib2 >= 1:2.80.0
 Requires:	gobject-introspection >= 1.64.0
