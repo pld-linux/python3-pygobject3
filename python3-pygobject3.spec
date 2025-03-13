@@ -7,12 +7,12 @@
 Summary:	Python 3 bindings for GObject library
 Summary(pl.UTF-8):	Wiązania Pythona 3 do biblioteki GObject
 Name:		python3-pygobject3
-Version:	3.52.1
+Version:	3.52.2
 Release:	1
 License:	LGPL v2+
 Group:		Libraries/Python
 Source0:	https://download.gnome.org/sources/pygobject/3.52/%{module}-%{version}.tar.gz
-# Source0-md5:	123f69218036939f216593fdc1ee0799
+# Source0-md5:	d73a0915118fd8be6251375691294b14
 URL:		https://pygobject.gnome.org/
 BuildRequires:	cairo-gobject-devel
 BuildRequires:	glib2-devel >= 1:2.80.0
