@@ -7,12 +7,12 @@
 Summary:	Python 3 bindings for GObject library
 Summary(pl.UTF-8):	Wiązania Pythona 3 do biblioteki GObject
 Name:		python3-pygobject3
-Version:	3.54.5
+Version:	3.56.1
 Release:	1
 License:	LGPL v2+
 Group:		Libraries/Python
-Source0:	https://download.gnome.org/sources/pygobject/3.54/%{module}-%{version}.tar.gz
-# Source0-md5:	613245df25142059c2b1c04850e23532
+Source0:	https://download.gnome.org/sources/pygobject/3.56/%{module}-%{version}.tar.gz
+# Source0-md5:	8e885d2d5f2cf89c8b6109615e6c6c74
 URL:		https://pygobject.gnome.org/
 BuildRequires:	cairo-gobject-devel
 BuildRequires:	glib2-devel >= 1:2.80.0
@@ -21,9 +21,9 @@ BuildRequires:	libffi-devel >= 3.0
 BuildRequires:	meson >= 0.64.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
-BuildRequires:	python3 >= 1:3.9
-BuildRequires:	python3-devel >= 1:3.9
-BuildRequires:	python3-modules >= 1:3.9
+BuildRequires:	python3 >= 1:3.10
+BuildRequires:	python3-devel >= 1:3.10
+BuildRequires:	python3-modules >= 1:3.10
 BuildRequires:	python3-pycairo-devel >= 1.16.0
 %if %{with tests}
 BuildRequires:	python3-pytest
@@ -33,13 +33,12 @@ BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 2.042
 %if %{with doc}
 BuildRequires:	python3-Sphinx
-BuildRequires:	python3-furo
 BuildRequires:	python3-sphinx_copybutton >= 0.5.2
 BuildRequires:	python3-pydata_sphinx_theme
 %endif
 Requires:	glib2 >= 1:2.80.0
 Requires:	gobject-introspection >= 1.64.0
-Requires:	python3-modules >= 1:3.9
+Requires:	python3-modules >= 1:3.10
 Conflicts:	python3-pygobject < 2.28.6-3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -110,6 +109,8 @@ Dokumentacja biblioteki Pythona GObject.
 
 %if %{with doc}
 %{__make} -C docs
+# recursive copy of docs sources?
+%{__rm} -r docs/_build/_static/{_build,devguide,guide,news,tutorials,Makefile,*.dia,*.py,*.rst}
 %endif
 
 %install
@@ -138,9 +139,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py3_sitedir}/gi/repository
 %{py3_sitedir}/gi/repository/*.py*
 %{py3_sitedir}/gi/repository/__pycache__
-%dir %{py3_sitedir}/pygtkcompat
-%{py3_sitedir}/pygtkcompat/*.py
-%{py3_sitedir}/pygtkcompat/__pycache__
 %{py3_sitedir}/PyGObject-%{version}.dist-info
 %dir %{py3_sitescriptdir}/gi
 %dir %{py3_sitescriptdir}/gi/overrides
@@ -157,5 +155,5 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with doc}
 %files apidocs
 %defattr(644,root,root,755)
-%doc docs/_build/{_images,_static,devguide,guide,*.html,*.js}
+%doc docs/_build/{_images,_static,devguide,guide,news,tutorials,*.html,*.js}
 %endif
