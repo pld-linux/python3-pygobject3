@@ -7,12 +7,12 @@
 Summary:	Python 3 bindings for GObject library
 Summary(pl.UTF-8):	Wiązania Pythona 3 do biblioteki GObject
 Name:		python3-pygobject3
-Version:	3.56.1
+Version:	3.56.2
 Release:	1
 License:	LGPL v2+
 Group:		Libraries/Python
 Source0:	https://download.gnome.org/sources/pygobject/3.56/%{module}-%{version}.tar.gz
-# Source0-md5:	8e885d2d5f2cf89c8b6109615e6c6c74
+# Source0-md5:	02914b57ded9f3918476a935b39af017
 URL:		https://pygobject.gnome.org/
 BuildRequires:	cairo-gobject-devel
 BuildRequires:	glib2-devel >= 1:2.80.0
@@ -108,9 +108,9 @@ Dokumentacja biblioteki Pythona GObject.
 %meson_build
 
 %if %{with doc}
-%{__make} -C docs
-# recursive copy of docs sources?
-%{__rm} -r docs/_build/_static/{_build,devguide,guide,news,tutorials,Makefile,*.dia,*.py,*.rst}
+# placing _build dir inside docs causes copying it recursively; build docs by invoking sphinx manually
+#%{__make} -C docs
+%{__python3} -m sphinx -b html docs docs-build/html
 %endif
 
 %install
@@ -129,8 +129,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc NEWS README.rst
 %dir %{py3_sitedir}/gi
-%attr(755,root,root) %{py3_sitedir}/gi/_gi.cpython*.so
-%attr(755,root,root) %{py3_sitedir}/gi/_gi_cairo.cpython*.so
+%{py3_sitedir}/gi/_gi.cpython-*.so
+%{py3_sitedir}/gi/_gi_cairo.cpython-*.so
 %{py3_sitedir}/gi/*.py
 %{py3_sitedir}/gi/__pycache__
 %dir %{py3_sitedir}/gi/overrides
@@ -155,5 +155,5 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with doc}
 %files apidocs
 %defattr(644,root,root,755)
-%doc docs/_build/{_images,_static,devguide,guide,news,tutorials,*.html,*.js}
+%doc docs-build/html/{_images,_static,devguide,guide,news,tutorials,*.html,*.js}
 %endif
