@@ -37,8 +37,8 @@ BuildRequires:	python3-Sphinx
 BuildRequires:	python3-sphinx_copybutton >= 0.5.2
 BuildRequires:	python3-pydata_sphinx_theme
 %endif
-Requires:	glib2 >= 1:2.80.0
-Requires:	gobject-introspection >= 1.64.0
+Requires:	glib2%{?_isa} >= 1:2.80.0
+Requires:	gobject-introspection%{?_isa} >= 1.64.0
 Requires:	python3-modules >= 1:3.10
 Conflicts:	python3-pygobject < 2.28.6-3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -53,11 +53,11 @@ Wiązania Pythona 3 do biblioteki GObject.
 Summary:	Python 3 bindings for GObject library - development metapackage
 Summary(pl.UTF-8):	Wiązania Pythona 3 do biblioteki GObject - metapakiet programistyczny
 Group:		Development/Languages/Python
-Requires:	%{name} = %{version}-%{release}
-Requires:	python-pygobject3-common-devel = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.80.0
-Requires:	libffi-devel >= 3.0
-Requires:	python3-devel >= 1:3.9
+Requires:	%{name}%{?_isa} = %{version}-%{release}
+Requires:	python-pygobject3-common-devel%{?_isa} = %{version}-%{release}
+Requires:	glib2-devel%{?_isa} >= 1:2.80.0
+Requires:	libffi-devel%{?_isa} >= 3.0
+Requires:	python3-devel%{?_isa} >= 1:3.9
 Obsoletes:	python3-pygobject3-examples < 3.50
 
 %description devel
@@ -72,9 +72,9 @@ GObject dla Pythona 3.
 Summary:	Python bindings for GObject library
 Summary(pl.UTF-8):	Wiązania Pythona do biblioteki GObject
 Group:		Development/Languages/Python
-Requires:	%{name} = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.80.0
-Requires:	libffi-devel >= 3.0
+Requires:	%{name}%{?_isa} = %{version}-%{release}
+Requires:	glib2-devel%{?_isa} >= 1:2.80.0
+Requires:	libffi-devel%{?_isa} >= 3.0
 
 %description -n python-pygobject3-common-devel
 This package contains headers files required to build wrappers for
